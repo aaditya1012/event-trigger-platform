@@ -1,0 +1,84 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "API documentation for managing event triggers and logs.",
+      "title": "Event Trigger Platform API",
+      "termsOfService": "http://example.com/terms/",
+      "contact": {
+        "name": "Developer Support",
+        "url": "http://example.com/support",
+        "email": "support@example.com"
+      },
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      },
+      "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+      "/triggers": {
+        "get": {
+          "summary": "List all triggers",
+          "tags": ["triggers"],
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new trigger",
+          "tags": ["triggers"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "trigger",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Trigger"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Created"
+            }
+          }
+        }
+      },
+      "/logs": {
+        "get": {
+          "summary": "List all event logs",
+          "tags": ["logs"],
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Trigger": {
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "payload": {"type": "object"},
+          "scheduled_at": {"type": "string", "format": "date-time"},
+          "recurring": {"type": "boolean"},
+          "interval": {"type": "integer"},
+          "test": {"type": "boolean"}
+        }
+      },
+      "EventLog": {
+        "properties": {
+          "trigger_id": {"type": "string"},
+          "timestamp": {"type": "string", "format": "date-time"},
+          "message": {"type": "string"}
+        }
+      }
+    }
+  }
+  
